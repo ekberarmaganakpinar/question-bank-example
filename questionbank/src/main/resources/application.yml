@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: questionbank
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driverClassName: org.h2.Driver
+    username: sa
+    password: password
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    defer-datasource-initialization: true
+  h2:
+    console:
+      enabled: true
+  cache:
+    type: redis
+    cache-names:
+      - cache1
+      - cache2
+      - cache3
+      - cache4
+    redis:
+      time-to-live: 60000
+      cache-null-values: true
+  data:
+    redis:
+      port: 6379
+      host: localhost
