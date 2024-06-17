@@ -32,14 +32,14 @@ class TestControllerTest {
     private TestController testController;
 
     @Test
-    void getAllTests_shouldReturnListOfTests() {
+    void getAllTests() {
         when(testService.getAllTest()).thenReturn(List.of(new com.questionbank.questionbank.entity.Test()));
         final var responseEntity = testController.getAllTests();
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.FOUND);
     }
 
     @Test
-    void findTestById_shouldReturnTest() {
+    void findTestById() {
         when(testService.findTestById(anyLong()))
                 .thenReturn(Optional.of(new com.questionbank.questionbank.entity.Test()));
         final var responseEntity = testController.findTestById(1L);
@@ -48,7 +48,7 @@ class TestControllerTest {
     }
 
     @Test
-    void createTest_shouldCreateAndReturnTest() {
+    void createTest() {
         when(testService.createTest(any(TestQueryDto.class)))
                 .thenReturn(new com.questionbank.questionbank.entity.Test());
 
@@ -59,7 +59,7 @@ class TestControllerTest {
     }
 
     @Test
-    void updateTest_shouldUpdateAndReturnTest() {
+    void updateTest() {
         when(testService.updateTest(any(Map.class), anyLong()))
                 .thenReturn(new com.questionbank.questionbank.entity.Test());
         ResponseEntity<TestQueryDto> responseEntity = testController.updateTest(1L, Collections.emptyMap());
@@ -68,7 +68,7 @@ class TestControllerTest {
     }
 
     @Test
-    void deleteTest_shouldDeleteAndReturnTest() {
+    void deleteTest() {
         when(testService.deleteTest(anyLong())).thenReturn(new com.questionbank.questionbank.entity.Test());
         final var responseEntity = testController.deleteTest(1L);
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.ACCEPTED);

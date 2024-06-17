@@ -12,10 +12,8 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 
 import com.questionbank.questionbank.dto.RegisterTestDto;
-import com.questionbank.questionbank.dto.StudentTestQueryDto;
 import com.questionbank.questionbank.dto.StudentTestWriteDto;
 import com.questionbank.questionbank.entity.StudentTest;
 import com.questionbank.questionbank.service.StudentTestService;
@@ -60,8 +58,7 @@ class StudentTestControllerTest {
     @Test
     void updateStudentTest() {
         when(studentTestService.updateStudentTest(any(Map.class), anyLong())).thenReturn(new StudentTest());
-        ResponseEntity<StudentTestQueryDto> responseEntity =
-                studentTestController.updateStudentTest(1L, Collections.emptyMap());
+        final var responseEntity = studentTestController.updateStudentTest(1L, Collections.emptyMap());
         assertThat(responseEntity.getStatusCode()).isEqualTo(HttpStatus.ACCEPTED);
         assertThat(responseEntity.getBody()).isNotNull();
     }

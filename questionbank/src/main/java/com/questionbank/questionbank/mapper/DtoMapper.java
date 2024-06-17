@@ -1,11 +1,12 @@
 /* (C)2024 */
 package com.questionbank.questionbank.mapper;
 
+import java.util.Optional;
+
+import org.apache.commons.lang3.StringUtils;
+
 import com.questionbank.questionbank.dto.*;
-import com.questionbank.questionbank.entity.Question;
-import com.questionbank.questionbank.entity.Student;
-import com.questionbank.questionbank.entity.StudentTest;
-import com.questionbank.questionbank.entity.Test;
+import com.questionbank.questionbank.entity.*;
 
 public abstract class DtoMapper {
 
@@ -96,5 +97,16 @@ public abstract class DtoMapper {
         studentTest.setTest(test);
         studentTest.setScore(studentTestWriteDto.getScore());
         return studentTest;
+    }
+
+    public static ParentDto parentEntityByDtoMapper(final Parent parent) {
+        final var student = Optional.ofNullable(parent.getStudent());
+        return ParentDto.builder()
+                .firstName(parent.getFirstName())
+                .lastName(parent.getLastName())
+                .studentName(student.map(Student::getFirstName).orElse(StringUtils.EMPTY)
+                        + student.map(Student::getLastName).orElse(StringUtils.EMPTY))
+                .studentNumber(student.map(Student::getStudentNumber).orElse(StringUtils.EMPTY))
+                .build();
     }
 }
